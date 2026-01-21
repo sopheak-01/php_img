@@ -3,8 +3,7 @@ include 'connection.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    
-    // Get the image filename first
+
     $select = "SELECT image FROM tbl_product WHERE id = '$id'";
     $result = mysqli_query($conn, $select);
     
@@ -12,12 +11,9 @@ if (isset($_GET['id'])) {
         $row = mysqli_fetch_assoc($result);
         $image_path = "image/" . $row['image'];
         
-        // Delete the image file if it exists
         if (file_exists($image_path)) {
             unlink($image_path);
         }
-        
-        // Delete the record from database
         $delete = "DELETE FROM tbl_product WHERE id = '$id'";
         
         if (mysqli_query($conn, $delete)) {

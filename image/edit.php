@@ -4,7 +4,6 @@ include 'connection.php';
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
 if ($id) {
-    // Fetch the product data
     $select = "SELECT * FROM tbl_product WHERE id = '$id'";
     $result = mysqli_query($conn, $select);
     $product = mysqli_fetch_assoc($result);
@@ -24,15 +23,12 @@ if (isset($_POST['update'])) {
     $price = $_POST['price'];
     $total = $qty * $price;
     
-    // Handle file upload if a new image is provided
     if (!empty($_FILES['file']['name'])) {
-        // Delete old image
         $old_image_path = "image/" . $product['image'];
         if (file_exists($old_image_path)) {
             unlink($old_image_path);
         }
         
-        // Upload new image
         if (!is_dir('image')) {
             mkdir('image', 0777, true);
         }
@@ -44,7 +40,7 @@ if (isset($_POST['update'])) {
         
         $update = "UPDATE tbl_product SET product_name = '$pro_name', qty = '$qty', price = '$price', total = '$total', image = '$file' WHERE id = '$id'";
     } else {
-        // Update without changing image
+        
         $update = "UPDATE tbl_product SET product_name = '$pro_name', qty = '$qty', price = '$price', total = '$total' WHERE id = '$id'";
     }
     
@@ -81,7 +77,8 @@ if (isset($_POST['update'])) {
         <form action="edit.php?id=<?php echo $id; ?>" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label">Product Name</label>
-                <input type="text" name="proname" class="form-control" value="<?php echo $product['product_name']; ?>" required>
+                <input type="text" name="proname" class="form-control" value="<?php echo $product['product_name']; ?>"
+                    required>
             </div>
 
             <div class="mb-3">
@@ -91,7 +88,8 @@ if (isset($_POST['update'])) {
 
             <div class="mb-3">
                 <label class="form-label">Price</label>
-                <input type="number" name="price" class="form-control" value="<?php echo $product['price']; ?>" step="0.01" required>
+                <input type="number" name="price" class="form-control" value="<?php echo $product['price']; ?>"
+                    step="0.01" required>
             </div>
 
             <div class="mb-3">
