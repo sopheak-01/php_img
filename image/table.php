@@ -16,7 +16,6 @@ $result = mysqli_query($conn, $select);
     <!-- #region-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
@@ -25,14 +24,10 @@ $result = mysqli_query($conn, $select);
 <body>
 
     <div class="container mt-4 p-5 shadow rounded-3">
-
-        <!-- Button trigger modal -->
         <button type="button" class="btn btn-outline-dark float-end mb-2" data-bs-toggle="modal"
             data-bs-target="#exampleModal">
             + Add Product
         </button>
-
-        <!-- Table -->
         <table class="table table-hover text-center">
             <thead>
                 <tr>
@@ -62,7 +57,8 @@ $result = mysqli_query($conn, $select);
                     </td>
                     <td>
                         <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-warning btn-sm">Edit</a>
-                        <a href="delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+                        <a href="delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm"
+                            onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
                     </td>
                 </tr>
                 <?php
@@ -72,8 +68,6 @@ $result = mysqli_query($conn, $select);
             </tbody>
         </table>
     </div>
-
-    <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -87,7 +81,7 @@ $result = mysqli_query($conn, $select);
                     <form action="insert.php" method="post" enctype="multipart/form-data">
                         <div class="mb-2">
                             <label class="form-label">Product Name</label>
-                            <input type="text"  name="proname" class="form-control" placeholder="Product Name...">
+                            <input type="text" name="proname" class="form-control" placeholder="Product Name...">
                         </div>
 
                         <div class="mb-2">
