@@ -1,3 +1,9 @@
+<?php
+include 'connection.php';
+
+$select = "SELECT * FROM tbl_product";
+$result = mysqli_query($conn, $select);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,21 +47,28 @@
             </thead>
 
             <tbody>
+                <?php
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                ?>
                 <tr>
-                    <td>001</td>
-                    <td>Coca</td>
-                    <td>5</td>
-                    <td>$1.25</td>
-                    <td>$6.25</td>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['product_name']; ?></td>
+                    <td><?php echo $row['qty']; ?></td>
+                    <td>$<?php echo number_format($row['price'], 2); ?></td>
+                    <td>$<?php echo number_format($row['total'], 2); ?></td>
                     <td>
-                        <img src="https://i.pinimg.com/1200x/60/70/9b/60709bf9dee58b89448c04a6a518b45b.jpg" width="35"
-                            class="rounded-circle">
+                        <img src="image/<?php echo $row['image']; ?>" width="35" class="rounded-circle">
                     </td>
                     <td>
-                        <button class="btn btn-outline-danger btn-sm">Delete</button>
-                        <button class="btn btn-outline-warning btn-sm">Edit</button>
+                        <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-warning btn-sm">Edit</a>
+                        <a href="delete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
                     </td>
                 </tr>
+                <?php
+                    }
+                }
+                ?>
             </tbody>
         </table>
     </div>
